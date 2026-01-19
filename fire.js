@@ -1,9 +1,7 @@
 import { fireColorsPalette } from './fireColorsPalette.js';
-
 const firePixelArray = [];
 const fireWidth = 200;
 const fireHeight = 40;
-
 
 function start(){
     createFireDataStructure();
@@ -15,7 +13,6 @@ function start(){
 
 function createFireDataStructure(){
     const numberOfPixels = fireWidth * fireHeight;
-
     for(let i = 0; i < numberOfPixels; i++){
         firePixelArray[i] = 0;
     }
@@ -26,7 +23,6 @@ function calculateFirePropagation(){
     for(let column = 0; column < fireWidth; column++){
         for(let row = 0; row < fireHeight; row++){
             const pixelIndex = column + (fireWidth * row);
-            //console.log(pixelIndex)
             updateFireIntensityPerPixel(pixelIndex);
         }
     }
@@ -36,15 +32,14 @@ function calculateFirePropagation(){
 
 function updateFireIntensityPerPixel(currentPixelIndex){
     const belowPixelIndex = currentPixelIndex + fireWidth;
-
-    if(belowPixelIndex >= fireWidth * fireHeight){
-        return;
-    }
+        if(belowPixelIndex >= fireWidth * fireHeight){
+            return;
+        }
     const decay = Math.floor(Math.random() * 3);
     const belowPixelFireIntensity = firePixelArray[belowPixelIndex];
     const newFireIntensity = 
-        belowPixelFireIntensity - decay >= 0 ?
-        belowPixelFireIntensity - decay : 0;
+            belowPixelFireIntensity - decay >= 0 ?
+            belowPixelFireIntensity - decay : 0;
     firePixelArray[currentPixelIndex - decay] = newFireIntensity
 }
 
@@ -78,11 +73,11 @@ function renderFire(){
     document.querySelector('#fireCanvas').innerHTML = html;
 }
 
+
 function createFireSource(){
     for (let column = 0; column <= fireWidth; column++){
         const overflowPixelIndex = fireWidth * fireHeight;
         const pixelIndex = (overflowPixelIndex - fireWidth) + column;
-
         firePixelArray[pixelIndex] = 36;
     }
 }
